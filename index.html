@@ -14,16 +14,17 @@
         .gradient-text { background: linear-gradient(90deg, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         /* TIMER UI - FIXED CONTRAST */
-        #timerContainer { background: #ffffff; color: #020617; box-shadow: 0 10px 40px rgba(0,0,0,0.8); border: 3px solid #3b82f6; z-index: 1000; }
+        #timerContainer { background: #ffffff; color: #020617; box-shadow: 0 10px 40px rgba(0,0,0,0.8); border: 3px solid #3b82f6; z-index: 1000; cursor: pointer; transition: transform 0.2s; }
+        #timerContainer:active { transform: scale(0.95); }
         @keyframes flicker { 0%, 100% { background-color: #ffffff; } 50% { background-color: #fca5a5; } }
         .timer-warning { animation: flicker 1s infinite; border: 3px solid #ef4444 !important; color: #b91c1c !important; }
         .timer-stop { background-color: #991b1b !important; color: #ffffff !important; border: 3px solid #f87171 !important; animation: none; }
     </style>
 </head>
-<body onload="startTimer()">
+<body>
 
-    <div id="timerContainer" class="fixed bottom-10 right-10 px-8 py-4 rounded-3xl flex items-center gap-4 transition-all">
-        <i class="fas fa-hourglass-start text-blue-600 text-2xl" id="timerIcon"></i>
+    <div id="timerContainer" onclick="handleTimerClick()" class="fixed bottom-10 right-10 px-8 py-4 rounded-3xl flex items-center gap-4 transition-all">
+        <i class="fas fa-play text-blue-600 text-2xl" id="timerIcon"></i>
         <span id="displayTime" class="text-4xl font-black font-mono tracking-tighter">00:00</span>
     </div>
 
@@ -58,65 +59,60 @@
         <section id="problem" class="grid md:grid-cols-2 gap-12 items-stretch">
             <div class="glass p-10 rounded-[2.5rem] flex flex-col justify-center border-l-4 border-blue-600">
                 <h2 class="text-3xl font-extrabold mb-6">Problem Statement</h2>
-                <p class="text-slate-400 leading-relaxed text-justify">Healthcare systems often operate on fragmented and manual processes for symptom assessment, patient record management, appointment booking, and virtual consultations. This leads to delayed diagnosis, inefficient resource utilization, data silos, and limited accessibility to timely medical guidance. <br> <br>
-
-This project addresses these challenges by designing and implementing an integrated digital platform that enables structured symptom evaluation, predictive health insights, streamlined appointment scheduling, secure payment processing, and real-time doctor–patient consultations within a unified system.
-</p>
+                <p class="text-slate-400 leading-relaxed text-justify">Healthcare systems frequently rely on disconnected and manual workflows for symptom evaluation, medical record handling, appointment scheduling, and teleconsultation services. This fragmentation results in delayed clinical decisions, suboptimal resource management, isolated data repositories, and reduced access to prompt medical support. <br><br>
+                This project tackles these limitations by developing and deploying a comprehensive digital platform that facilitates structured symptom assessment, predictive health analysis, efficient appointment management, secure transaction processing, and real-time doctor–patient interaction within a single, unified ecosystem.
+                </p>
             </div>
             <div class="space-y-6">
                 <div class="glass p-7 rounded-3xl border-r-4 border-blue-500/50">
                     <h3 class="text-blue-400 font-bold text-xs uppercase tracking-widest mb-2">Literature Review / Market Research</h3> 
-                    <br>
-                    <p class="text-sm text-slate-500 italic"><div class="overflow-x-auto">
-    <table class="w-full text-xs text-left border-collapse">
-        <thead>
-            <tr class="text-blue-400 uppercase tracking-widest">
-                <th class="pb-3">Platform  </th>
-                <th class="pb-3">Symptom Check</th>
-                <th class="pb-3">Booking </th>
-                <th class="pb-3">Consultation</th>
-                <th class="pb-3">Integration Level </th>
-            </tr>
-        </thead>
-        <tbody class="text-slate-400">
-            <tr class="border-t border-white/10">
-                <td class="py-3 font-semibold">Ada Health</td>
-                <td>✓</td>
-                <td>✗</td>
-                <td>Limited</td>
-                <td>Partial</td>
-            </tr>
-            <tr class="border-t border-white/10">
-                <td class="py-3 font-semibold">Buoy Health</td>
-                <td>✓</td>
-                <td>✗</td>
-                <td>Limited</td>
-                <td>Partial</td>
-            </tr>
-            <tr class="border-t border-white/10">
-                <td class="py-3 font-semibold">Babylon Health</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td>Moderate</td>
-            </tr>
-            <tr class="border-t border-blue-500/40 bg-blue-500/5">
-                <td class="py-3 font-bold text-blue-400">Our Platform</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td class="font-bold text-blue-400">Fully Integrated</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-</p>
+                    <div class="overflow-x-auto mt-4">
+                        <table class="w-full text-xs text-left border-collapse">
+                            <thead>
+                                <tr class="text-blue-400 uppercase tracking-widest">
+                                    <th class="pb-3">Platform</th>
+                                    <th class="pb-3">Symptom Check</th>
+                                    <th class="pb-3">Booking</th>
+                                    <th class="pb-3">Consultation</th>
+                                    <th class="pb-3">Integration</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-400">
+                                <tr class="border-t border-white/10">
+                                    <td class="py-3 font-semibold">Ada Health</td>
+                                    <td>✓</td>
+                                    <td>✗</td>
+                                    <td>Limited</td>
+                                    <td>Partial</td>
+                                </tr>
+                                <tr class="border-t border-white/10">
+                                    <td class="py-3 font-semibold">Buoy Health</td>
+                                    <td>✓</td>
+                                    <td>✗</td>
+                                    <td>Limited</td>
+                                    <td>Partial</td>
+                                </tr>
+                                <tr class="border-t border-white/10">
+                                    <td class="py-3 font-semibold">Babylon Health</td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>Moderate</td>
+                                </tr>
+                                <tr class="border-t border-blue-500/40 bg-blue-500/5">
+                                    <td class="py-3 font-bold text-blue-400">Our Platform</td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td class="font-bold text-blue-400">Full</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="glass p-7 rounded-3xl border-r-4 border-purple-500/50">
                     <h3 class="text-purple-400 font-bold text-xs uppercase tracking-widest mb-2">Research Gap / Innovation</h3>
-                    <p class="text-sm text-slate-500 italic">Existing solutions are fragmented, handling symptom checking and teleconsultation separately with limited workflow integration.
-
-This project introduces a unified platform that integrates structured symptom assessment, appointment booking, secure payments, medical records, and live consultations into a single end-to-end healthcare system.</p>
+                    <p class="text-sm text-slate-500 italic">Existing solutions are fragmented, handling symptom checking and teleconsultation separately with limited workflow integration. This project introduces a unified platform that integrates structured symptom assessment, appointment booking, secure payments, medical records, and live consultations into a single end-to-end healthcare system.</p>
                 </div>
             </div>
         </section>
@@ -127,7 +123,8 @@ This project introduces a unified platform that integrates structured symptom as
                 <div class="glass p-8 rounded-3xl text-center">
                     <i class="fas fa-database text-blue-500 text-3xl mb-4"></i>
                     <h3 class="font-bold mb-2 uppercase text-xs tracking-widest">Dataset / Input</h3>
-                    <p class="text-sm text-slate-500">Source: 
+                    <p class="text-sm text-slate-500 text-left">
+                        Source: 
 Public disease–symptom datasets (e.g., Kaggle), curated medical symptom lists, and user-entered triage inputs.
 <br>
 <br>
@@ -142,9 +139,9 @@ Size:
 <br>
 Preprocessing:
 Data cleaning, duplicate removal, binary symptom encoding, label standardization, class balancing, and train–test split.
-</p>
+                    </p>
                 </div>
-                <div class="glass p-8 rounded-3xl text-center">
+             <div class="glass p-8 rounded-3xl text-center">
                     <i class="fas fa-microchip text-purple-500 text-3xl mb-4"></i>
                     <h3 class="font-bold mb-2 uppercase text-xs tracking-widest">Model / Architecture</h3>
                     <p class="text-sm text-slate-500"><div class="overflow-x-auto">
@@ -153,7 +150,7 @@ Data cleaning, duplicate removal, binary symptom encoding, label standardization
 <br>
             <tr class="border-t border-white/10"> 
                 <td class="py-3 font-semibold text-purple-400 w-1/3">Algorithm</td>
-                <td>K-Nearest Neighbors (KNN) for symptom-based disease prediction</td>
+                <td>Multinomial Naive Bayes for symptom-based disease prediction</td>
             </tr>
 
             <tr class="border-t border-white/10">
@@ -182,15 +179,12 @@ Data cleaning, duplicate removal, binary symptom encoding, label standardization
 
         </tbody>
     </table>
-</div>
-</p>
+                    </div>
                 </div>
-                <div class="glass p-8 rounded-3xl text-center border-2 border-green-500/20 bg-green-500/5">
-                                       <br> <br><br><br><br>
- <i class="fab fa-python text-green-500 text-3xl mb-4"></i>
-
+                <div class="glass p-8 rounded-3xl text-center border-2 border-green-500/20 bg-green-500/5 flex flex-col justify-center items-center">
+                    <i class="fab fa-python text-green-500 text-3xl mb-4"></i>
                     <h3 class="font-bold mb-4 uppercase text-xs tracking-widest text-green-400">Live Execution</h3>
-                    <a href="[LINK]" target="_blank" class="px-6 py-2 bg-green-600 rounded-full text-[10px] font-black hover:bg-green-500 transition shadow-lg shadow-green-900/40">VIEW CODE / DEMO</a>
+                    <a href="https://medibotnew.vercel.app/" target="_blank" class="px-6 py-2 bg-green-600 rounded-full text-[10px] font-black hover:bg-green-500 transition shadow-lg shadow-green-900/40">VIEW CODE / DEMO</a>
                 </div>
             </div>
         </section>
@@ -204,8 +198,8 @@ Data cleaning, duplicate removal, binary symptom encoding, label standardization
                         <span class="text-slate-400 font-bold uppercase text-xs tracking-widest">Accuracy / Performance</span>
                         <span class="text-blue-400 font-mono font-black text-3xl">84%</span>
                     </div>
-                    <p class="text-slate-500 text-sm italic text-justify leading-relaxed">Evaluation Metrics:
-Accuracy, Precision, Recall, F1-Score, and Confusion Matrix for disease classification performance. <br>
+                    <p class="text-slate-500 text-sm italic text-justify leading-relaxed">
+                        Accuracy, Precision, Recall, F1-Score, and Confusion Matrix for disease classification performance. <br>
 
 Quantifiable Outcomes:
 Achieved ~85–90% classification accuracy on test data. <br>
@@ -214,7 +208,8 @@ Improved triage response time (less than 2 seconds prediction latency). <br>
 Higher precision compared to baseline rule-based symptom matching.
 <br>
 Baseline Comparison:
-Outperformed simple keyword/rule-based approaches in predictive consistency and multi-class disease identification.</p>
+Outperformed simple keyword/rule-based approaches in predictive consistency and multi-class disease identification.
+                    </p>
                 </div>
             </div>
         </section>
@@ -244,7 +239,19 @@ Outperformed simple keyword/rule-based approaches in predictive consistency and 
         // TIMER LOGIC
         let sec = 0;
         let timer = null;
+        let isRunning = false;
+
+        function handleTimerClick() {
+            if (!isRunning) {
+                startTimer();
+                isRunning = true;
+                document.getElementById('timerIcon').classList.replace('fa-play', 'fa-hourglass-start');
+            }
+        }
+
         function startTimer() {
+            if (timer) clearInterval(timer);
+            
             timer = setInterval(() => {
                 sec++;
                 let m = Math.floor(sec / 60);
@@ -263,7 +270,7 @@ Outperformed simple keyword/rule-based approaches in predictive consistency and 
             }, 1000);
         }
 
-        // RESULTS CHART (Demo Data)
+        // RESULTS CHART
         const ctx = document.getElementById('resultsChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
